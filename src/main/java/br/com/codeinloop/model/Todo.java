@@ -1,8 +1,14 @@
 package br.com.codeinloop.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.ws.rs.core.UriBuilder;
+
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 @Entity
 public class Todo {
@@ -10,9 +16,10 @@ public class Todo {
     @GeneratedValue
     private Long id;
     private String title;
-    private Boolean completed;
+    private boolean completed;
+    @Column(name = "\"order\"")
     private Integer order;
-    private String url;
+    private URL url;
 
 
     public Long getId() {
@@ -31,11 +38,17 @@ public class Todo {
         this.title = title;
     }
 
-    public Boolean getCompleted() {
-        return completed;
+    public boolean getCompleted() {
+        return this.completed;
+    }
+    public URL getUrl() throws URISyntaxException, MalformedURLException {
+        if (this.id != null) {
+            return UriBuilder.fromUri(url.toURI()).scheme(url.getProtocol()).path(this.id.toString()).build().toURL();
+        }
+        return this.url;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 
@@ -47,11 +60,9 @@ public class Todo {
         this.order = order;
     }
 
-    public String getUrl() {
-        return url;
-    }
 
-    public void setUrl(String url) {
+
+    public void setUrl(URL url) {
         this.url = url;
     }
 }
