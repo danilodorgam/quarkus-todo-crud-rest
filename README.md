@@ -6,6 +6,7 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
 This project uses Quarkus, to build an API for a ToDo application adhering to the spec described at https://www.todobackend.com/.
+The full article about this project can be found here: https://codeinloop.com.br/criando-uma-api-rest-com-quarkus-parte-1/
 
 ## Running the application in dev mode
 
